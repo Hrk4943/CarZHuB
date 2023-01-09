@@ -99,7 +99,44 @@
                       </li>
                     
                   </ul>
+                  <!-- <ul>
+                    <li> -->
+                        <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+                            <input class="form-control mr-sm-2" type="text"  name="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                          </form>
+                    <!-- </li> -->
+                    <li class="search" hidden>
+                        <form action="/" method="post" hidden>
+                        <div class="input-group">
+                            <input type="text" placeholder="Search.." name="search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit"><i
+                                        class="icon-search"></i></button>
+                            </span>
+                        </div></form>
+                    <!-- </li>
+                  </ul> -->
                   
+
+
+
+                  <!-- <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" name="search" placeholder="search">
+                    <button type="submit">search</button>
+                </form></li>
+
+                <li class="search" hidden>
+                    <form action="/" method="post" hidden>
+                    <div class="input-group">
+                        <input type="text" placeholder="Search.." name="search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit"><i
+                                    class="icon-search"></i></button>
+                        </span>
+                    </div></form>
+                </li> -->
+            <!-- </div> -->
                 </div>
               </nav>
            
@@ -116,9 +153,9 @@
                             <h3>
                                 <%=x.productName%>
                             </h3>
-                            <p class="product-price"><span>
-                                    <%=x.price%>
-                                </span> </p>
+                            <p class="product-price"><span><%=x.price%></span> </p>
+                            <p class="product-price"><b><span>Year-<%=x.year%> | KM-<%=x.km%></span></b> </p>
+							<a href="/singleproduct/<%= x._id %>" class="cart-btn"><i class=""></i> View Details</a> 
 
                             
                                 <!-- <form action="/addToWishlist/<%= x._id %> " method="post">
@@ -134,13 +171,27 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="pagination-wrap">
-                        <ul>
+                        <% if(hasPreviousPage){ %>
+                            <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(253, 97, 6)" class="text-center"
+                              href="/allproducts?page=<%= PreviousPage %>"><i class="fa fa-chevron-left"
+                                aria-hidden="true"></i>&nbsp; Previous</a>
+                            <% } %>
+                              <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(253, 97, 6); border: 2px solid rgb(253, 97, 6); border-radius: 50px;"
+                                href="/allproducts?page=<%= page %>">
+                                <%= page %>
+                              </a>
+                              <% if(hasNextPage) { %>
+                                <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(253, 97, 6);"
+                                  href="/allproducts?page=<%=  page+1 %>">Next &nbsp; <i class="fa fa-chevron-right"
+                                    aria-hidden="true"></i></a>
+                                <% } %>
+                        <!-- <ul>
                             <li><a href="#">Prev</a></li>
                             <li><a href="#">1</a></li>
                             <li><a class="active" href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">Next</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

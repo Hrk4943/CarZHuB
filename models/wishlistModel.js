@@ -4,13 +4,13 @@ const Objectid = mongoose.Types.ObjectId
 
 const wishlistSchema = new mongoose.Schema({
 
-    userId:{
+    userId: {
         type: Objectid,
         required: true,
         ref: 'UserData'
     },
     productIds: {
-        type:[Objectid],
+        type: [Objectid],
         required: true,
         ref: 'ProductData'
     },

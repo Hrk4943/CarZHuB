@@ -7,4 +7,4 @@ const typeSchema = new mongoose.Schema({
     }
 })
 
-module.exports = TypeModel = mongoose.model('CategoryData',typeSchema);
+module.exports = TypeModel = mongoose.model('CategoryData', typeSchema);

@@ -7,4 +7,4 @@ const fuelSchema = new mongoose.Schema({
     }
 })
 
-module.exports = FuelTypeModel = mongoose.model('FuelData',fuelSchema);
+module.exports = FuelTypeModel = mongoose.model('FuelData', fuelSchema);

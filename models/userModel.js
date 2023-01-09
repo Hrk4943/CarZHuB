@@ -1,34 +1,34 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    fullName : {
+    fullName: {
         type: String,
         required: true
     },
-    userName : {
+    userName: {
         type: String,
         required: true
     },
-    email : {
+    email: {
         type: String,
         required: true,
         unique: true,
     },
-    phone : {
+    phone: {
         type: Number,
         required: true
     },
-    password : {
+    password: {
         type: String,
         required: true
     },
-    status : {
+    status: {
         type: String,
         default: 'Unblocked'
     },
-    BookedVehicles:[{
-     type:mongoose.Types.ObjectId,
-     ref:'ProductData'
+    BookedVehicles: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'ProductData'
     }],
     date: {
         type: Date,
@@ -37,4 +37,4 @@ const userSchema = new mongoose.Schema({
 
 })
 
-module.exports = UserModel = mongoose.model('UserData',userSchema);
+module.exports = UserModel = mongoose.model('UserData', userSchema);

@@ -58,6 +58,19 @@
                       </form>
                       <% } %>
                         <br>
+                        <% if (product.drive=="TestDrive" ) { %>
+                          <form action="/admin/testDrived/<%= product._id %> " method="post">
+                            <button type="submit" class="btn btn-success" style="width: 100px;"> Test Drived</button>
+                          </form>
+                          <% } else { %>
+                            <form action="/admin/testDrive/<%= product._id %> " method="post">
+                              <button type="submit" class="btn btn-danger" style="width: 100px;"> Test Drive</button>
+                            </form>
+                            <% } %>
+                        <!-- <form action="/admin/unblockCar/<%= product._id %> " method="post">
+                          <button type="submit" class="btn btn-warning" style="width: 100px;"> Unbook </button>
+                        </form> -->
+                        <br>
 
                         <!-- Sold or not Sold -->
                         <% if (product.sold=='Notsold' ) { %>

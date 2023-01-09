@@ -16,10 +16,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         ref: "FuelData"
     },
-    location:{
-        type:Objectid,
-        required:true,
-        ref:"LocationData"
+    location: {
+        type: Objectid,
+        required: true,
+        ref: "LocationData"
     },
     productName: {
         type: String,
@@ -29,17 +29,25 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    year:{
-        type:Number,
-        required:true,
+    reg: {
+        type: String,
+        required: true
     },
-    km:{
-        type:Number,
-        required:true,
+    transmission: {
+        type: String,
+        required: true
     },
-    owner:{
-        type:Number,
-        required:true,
+    year: {
+        type: Number,
+        required: true,
+    },
+    km: {
+        type: Number,
+        required: true,
+    },
+    owner: {
+        type: Number,
+        required: true,
     },
     price: {
         type: Number,
@@ -51,12 +59,17 @@ const productSchema = new mongoose.Schema({
     },
     image: {
         type: [String],
-        
+
     },
     status: {
         type: String,
         default: 'Unblocked'
     },
+    drive:{
+        type:String,
+        default:'TestDrive'
+    },
+    
     sold: {
         type: String,
         default: 'Notsold'
@@ -69,6 +82,7 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+
 
 
 

@@ -155,31 +155,31 @@
         </div>
         <div class="card-body">
           <div class="chart-container-2">
-            <canvas id="chart2"></canvas>
+            <!-- <canvas id="chart2"></canvas> -->
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
           </div>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center">
             <tbody>
               <tr>
-                <td><i class="fa fa-circle text-white mr-2"></i> Direct</td>
-                <td>$5856</td>
-                <td>+55%</td>
+                <br><br>
               </tr>
               <tr>
-                <td><i class="fa fa-circle text-light-1 mr-2"></i>Affiliate</td>
-                <td>$2602</td>
-                <td>+25%</td>
+                <td><i class="fa fa-circle text-light-1 mr-2"></i>Total Cars</td>
+                <td id="productsID"><%= products %></td>
+                <td></td>
               </tr>
               <tr>
-                <td><i class="fa fa-circle text-light-2 mr-2"></i>E-mail</td>
-                <td>$1802</td>
-                <td>+15%</td>
+                <td><i class="fa fa-circle text-light-2 mr-2"></i>Booked Cars</td>
+                <td id="bookedID"><%= blocked %></td>
+                <td></td>
               </tr>
               <tr>
-                <td><i class="fa fa-circle text-light-3 mr-2"></i>Other</td>
-                <td>$1105</td>
-                <td>+5%</td>
+                <td><i class="fa fa-circle text-light-3 mr-2"></i>Sold Cars</td>
+                <td id="soldID"><%= sold %></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -190,7 +190,87 @@
   <!--End Row-->
 
 
+<!--start overlay-->
+<div class="overlay toggle-menu"></div>
+<!--end overlay-->
 
-  <!--End Dashboard Content-->
+</div>
+<!-- End container-fluid-->
 
-  <%- include('../admin/layout/admin-footer.ejs') -%>
+</div>
+<!--End content-wrapper-->
+<!--Start Back To Top Button-->
+<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+<!--End Back To Top Button-->
+
+<!--Start footer-->
+<footer class="footer">
+  <div class="container">
+    <div class="text-center">
+      Copyright © 2022 CarZHuB.
+    </div>
+  </div>
+</footer>
+
+<div class="di" style="background-color: rgba(148, 145, 139, 0.205);"></div>
+<!--End footer-->
+
+<!-- Bootstrap core JavaScript-->
+<script src="/javascripts/admin/homejs/jquery.min.js"></script>
+<script src="/javascripts/admin/homejs/popper.min.js"></script>
+<script src="/javascripts/admin/homejs/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="/plugins/admin/home/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="/javascripts/admin/homejs/sidebar-menu.js"></script>
+<!-- loader scripts -->
+<!-- <script src="/javascripts/admin/homejs/jquery.loading-indicator.js"></script> -->
+<!-- Custom scripts -->
+<script src="/javascripts/admin/homejs/app-script.js"></script>
+<!-- Chart js -->
+
+<script src="/plugins/admin/home/Chart.js/Chart.min.js"></script>
+
+<!-- Index js -->
+<script src="/javascripts/admin/homejs/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script>
+
+
+
+
+
+  let products = document.getElementById('productsID').innerHTML;
+  let sold = document.getElementById('soldID').innerHTML;
+  let booked = document.getElementById('bookedID').innerHTML;
+
+
+
+  var xValues = ["Sold Cars", "Booked Cars", "Total Cars"];
+  var yValues = [sold, booked, products];
+  var barColors = [
+    "#000000",
+    "#6c6c6c",
+    "#ffffff"
+  ];
+  
+  new Chart("myChart", {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    
+  });
+  </script>
+
+  
+</body>
+
+</html>
+

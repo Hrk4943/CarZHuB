@@ -138,11 +138,11 @@
 							<h3><%=x.productName%></h3>
 							<p class="product-price"><b><span>Rs-<%=x.price%></span></b> </p>
 							<p class="product-price"><b><span>Year-<%=x.year%> | KM-<%=x.km%></span></b> </p>
-							<!-- <a href="cart.html" class="cart-btn">
-								<i class="fas fa-shopping-cart"></i> Add to Cart</a> -->
+							<a href="/singleproduct/<%= x._id %>" class="cart-btn">
+								<i class=""></i> View Details</a> 
 								<!-- <form action="/addToWishlist/<%= x._id %> " method="post">
                                     <button type="submit" class="btn btn-light btn-outline btn-lg rounded-pill" style="width: 200px;"><b>Add to Interest</b></button>
-                                </form> -->
+                                </form>
 
 								<!-- <a href="/addToWishlist/<%= x._id %>" class="cart-btn">
 								<i class="far fa-heart"></i>

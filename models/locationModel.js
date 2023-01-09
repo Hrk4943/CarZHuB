@@ -5,6 +5,6 @@ const locationSchema = new mongoose.Schema({
         required: true
     }
 })
-  
+
 
 module.exports = LocationModel = mongoose.model('LocationData', locationSchema)
