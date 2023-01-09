@@ -1,0 +1,108 @@
+<%-include('../user/layout/user-header.ejs') -%>
+<!---start---->
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 offset-lg-2 text-center">
+              <div class="breadcrumb-text">
+                  <p><u>CarZHuB</u></p>
+                  <h1><%=product.productName%></h1>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!---end --->
+
+<!-- single product -->
+<div class="single-product mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <a href="/images/cars/<%= product.image[0] %>" class="MagicZoom" data-options="zoomWidth:400px; zoomHeight:400px"><img src="/images/cars/<%= product.image[0] %>" /></a>
+                    <!-- <img class="d-block w-100 h-100" src="/images/cars/<%= product.image[0]%>" alt="First slide"> -->
+                    <!-- <a href="/images/cars/<%= product.image[0] %>" class="MagicZoom" data-options="zoomDistance: 150"><img src="/images/cars/<%= product.image[0] %>" /></a> -->
+                  </div>
+                  <%product.image.forEach((image,index)=>{ %>
+                    <%if(!index==0){%>
+                  <div class="carousel-item ">
+                    <a href="/images/cars/<%=image %>" class="MagicZoom" data-options="zoomWidth:400px; zoomHeight:400px"><img src="/images/cars/<%=image %>" /></a>
+                    <!-- <a href="/images/cars/<%= image %>" class="MagicZoom" data-options="zoomDistance: 150"><img src="/images/cars/<%= image %>" /></a> -->
+                    <!-- <a href="/images/cars/<%= image %>" class="MagicZoom"><img src="/images/cars/<%= image %>" /></a> -->
+                    <!-- <img class="d-block w-100 h-100"  src="/images/cars/<%= product.image%>" alt="Second slide"> -->
+                  </div>
+                  <%} %>
+                  <% })%>
+                  
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            <div class="col-md-7">
+                <div class="single-product-content">
+                    <h2><%=product.productName%></h2>
+                    <p class="single-product-pricing"><span>Rs-<%=product.price%></span></p>
+                    <p><%=product.discription%></p>
+                    <div class="single-product-form">
+                        
+                        
+                        <p><strong>Categories: </strong><%=product.type.typeName%></p>
+                        <p><strong>Brand: </strong><%=product.brand.brand%></p>
+                        <p><strong>Fuel:</strong><%=product.fuelType.fuelType%></p>
+                        <p><strong>KM:</strong><%=product.km%></p>
+                        <p><strong>Year:</strong><%=product.year%></p>
+                        <p><strong>Ownership:</strong><%=product.owner%></p>
+                        <p><strong>Location: </strong><%=product.location.location%></p>
+                        
+                        <p><strong>Advance:</strong><%=product.advance%></p>
+
+
+                        <div style="display: flex; justify-content: center;">
+                          <% if(product.status == "Unblocked") { %>
+                              <form action="/carblocking/<%= product._id %> " method="get">
+                                  <button type="submit" class="btn btn-outline-secondary btn-lg rounded-pill" style="width: 200px;">Book Vehicle</button>
+                              </form>
+                          <% } else { %>
+                              <!-- <form action="" method="get"> -->
+                                  <button type="submit" class="btn btn-Danger btn-outline btn-lg rounded-pill" style="width: 200px;">Booked</button>
+                              <!-- </form> -->
+                          <% } %>
+                          <form action="/addToWishlist/<%= product._id %> " method="post">
+                              <button type="submit" class="btn btn-light btn-outline btn-lg rounded-pill" style="width: 200px;"> Add to Interest</button>
+                          </form>
+
+
+                        <!-- <form action="/addToWishlist/<%= product._id %> " method="post">
+                          <button type="submit" class="btn btn-light btn-outline btn-lg rounded-pill" style="width: 200px;"><b>Add to WishList</b></button>
+                      </form>
+                      <a href="#" class="cart-btn" >Block The Car</a>
+               -->
+                        <!-- <a href="/addToWishlist/<%= product._id %>" class="cart-btn"><i class="far fa-heart"></i> Add to Wishlist</a> -->
+                        <!-- <a href="#" class="cart-btn" style="margin-left: 250px;">
+                        
+                          Block The Car</a> -->
+                    </div>
+                    <h4>Share:</h4>                    
+                    <ul class="product-share">
+                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end single product -->
+
+<%-include('../user/layout/user-footer.ejs') -%>

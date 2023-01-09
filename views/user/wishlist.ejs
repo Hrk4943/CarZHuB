@@ -1,0 +1,51 @@
+<%-include('../user/layout/user-header.ejs') -%>
+
+
+
+  <div class="breadcrumb-section breadcrumb-bg mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>CarZHuB</p>
+            <h1>WishList</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
+
+  <!-- cart -->
+
+<div class="container ">
+    <div class="row product-lists ">
+        <%list.forEach(function(x){ %>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-product-item " style="background-color: rgb(182, 183, 184);">
+                    <div class="product-image">
+                        <a href="/singleproduct/<%= x._id %>"><img src="/images/cars/<%= x.result.image%>"
+                                style="height:150px;object-fit: cover;" alt=""></a>
+                    </div>
+                    <h3>
+                        <%=x.result.productName%>
+                    </h3>
+                    <p class="product-price"><span>
+                            <%=x.result.price%>
+                        </span> </p>
+    
+                    
+                        <form action="/removeFromWishlist/<%= x.result._id %>" method="post">
+                            <button type="submit" class="btn btn-danger btn-outline btn-lg rounded-pill" style="width: 200px;"><b>Remove</b></button>
+                        </form>
+    
+                </div>
+            </div>
+    
+            <% }) %>
+    </div>
+     
+</div>
+  
+
+  <%-include('../user/layout/user-footer.ejs') -%>

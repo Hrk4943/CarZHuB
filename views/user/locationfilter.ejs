@@ -1,0 +1,52 @@
+<%-include('../user/layout/user-header.ejs') -%>
+
+
+
+<div class="breadcrumb-section breadcrumb-bg  mb-150">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p><u>CarZHuB</u></p>
+         
+            <h1>All Type of <%=locationFilter.fuelType%></h1>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container">
+        <div class="row product-lists ">
+            <%locationFilter.forEach(function(x){ %>
+                <div class="col-lg-4 col-md-6 text-center">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="/singleproduct/<%= x._id %>"><img src="/images/cars/<%= x.image[0] %>"
+                                    style="height:150px;object-fit: cover;" alt=""></a>
+                        </div>
+                        <h3>
+                            <%=x.productName%>
+                        </h3>
+                        <p class="product-price"><span>
+                                <%=x.price%>
+                            </span> </p>
+
+                  
+                        <!-- <form action="/addToWishlist/<%= x._id %> " method="post">
+                            <button type="submit" class="btn btn-light btn-outline btn-lg rounded-pill"
+                                style="width: 200px;"><b>Add to Interest</b></button>
+                        </form> -->
+
+                    </div>
+                </div>
+
+                <% }) %>
+        </div>
+    </div>
+
+
+
+    <%-include('../user/layout/user-footer.ejs') -%>

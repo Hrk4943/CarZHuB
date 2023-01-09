@@ -1,0 +1,64 @@
+<%- include('../admin/layout/admin-header.ejs') -%>
+
+
+    <div class="col-lg">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Add Location</div>
+                <hr>
+                <form action="/admin/addlocation" method="post">
+
+                    <div class="form-group">
+                        <label for="input-4">Location</label>
+                        <input class="form-control" id="input-4" type="text" placeholder="location" required name="location">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success px-5"> Add Location</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div class="card">
+            <div class="card-body ">
+                <div style="display: flex; justify-content: space-between;">
+                    <h5 class="card-title">All Locations</h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Location</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% location.forEach((x)=> { %>
+                                <tr>
+                                    <td><%= x.location %></td>
+    
+                                    <td>
+                                        <form action="/admin/deletelocation/<%= x._id %>" method="post">
+                                            <button type="submit" class="btn  btn-danger" style="width: 100px;"
+                                                onclick="return confirm('Are you sure you want to delete ?')"><i class="bi bi-trash-fill"></i></button>
+                                        </form>
+                                    
+                                </td>
+
+                                    </td>
+
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../admin/layout/admin-footer.ejs') -%>
