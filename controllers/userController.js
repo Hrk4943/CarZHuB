@@ -161,7 +161,7 @@ module.exports = {
 
 
   resendotp: (req, res) => {
-    try {
+    // try {
       var mailOptions = {
         to: Email,
         subject: "Otp for registration is: ",
@@ -176,14 +176,14 @@ module.exports = {
         res.render('user/otp', { msg: "otp has been sent" });
       });
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
   },
 
 
   verifyotp: (req, res) => {
-    try {
+    // try {
       if (req.body.otp == otp) {
         // res.send("You has been successfully registered");
 
@@ -220,9 +220,9 @@ module.exports = {
         res.render('user/otp', { msg: 'otp is incorrect' });
       }
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
   },
 
 
@@ -231,7 +231,7 @@ module.exports = {
 
   //login
   login: async (req, res) => {
-    try {
+    // try {
       const { email, password } = req.body;
       const user = await UserModel.findOne({ $and: [{ email: email }, { status: "Unblocked" }] });
       let NoUser = false;
@@ -253,9 +253,9 @@ module.exports = {
       req.session.userLogin = true;
       res.redirect('/');
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
   },
 
   signup: async (req, res) => {
@@ -336,7 +336,7 @@ module.exports = {
 
   // All Product
   allproduct: async (req, res) => {
-    try {
+    // try {
     if (req.session.userLogin) {
       // id = req.params.id
     
@@ -397,15 +397,15 @@ module.exports = {
 
     }
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
 
   },
 
   // Single Product
   singleproduct: async (req, res) => {
-    try {
+ 
 
 
     if (req.session.userLogin) {
@@ -451,9 +451,7 @@ module.exports = {
 
     }
 
-    } catch (err) {
-      next(err)
-    }
+   
   },
   categoryFilter: async (req, res) => {
     let login = req.session.userLogin
@@ -527,7 +525,7 @@ module.exports = {
 
   // Add to Wishlist
   addtowishlist: async (req, res) => {
-    try{
+ 
 
     
     if (req.session.userLogin) {
@@ -537,11 +535,13 @@ module.exports = {
       let wishlist = await Wishlist.findOne({ userId }).populate('productIds')
       
       var products = false;
-      wishlist.productIds.forEach(element => {
-        if (element._id == productId) {
-          products = true
-        }
-      });
+   if (wishlist){
+    wishlist.productIds.forEach(element => {
+      if (element._id == productId) {
+        products = true
+      }
+    });
+   }
       if (products == true) {
         
         res.json({ exist: false })
@@ -574,9 +574,7 @@ module.exports = {
     else {
       res.redirect('/login')
     }
-  } catch (err) {
-    next(err)
-  }
+ 
 
   },
 
@@ -584,7 +582,7 @@ module.exports = {
 
   // Wishlist Page
   wishlist: async (req, res) => {
-    try{
+    // try{
 
     id = req.params.id
     let userId = req.session.userId;
@@ -688,14 +686,14 @@ module.exports = {
         res.redirect('/login')
       }
     }
-  } catch(err){
-    next(err)
-  }
+  // } catch(err){
+  //   next(err)
+  // }
 
   },
 
   removeFromWishlist: async (req, res) => {
-    try{
+    // try{
 
     if (req.session.userLogin) {
 
@@ -708,9 +706,9 @@ module.exports = {
     } else {
       res.redirect('/login')
     }
-  } catch (err){
-    next(err)
-  }
+  // } catch (err){
+  //   next(err)
+  // }
 
 
   },
@@ -719,7 +717,7 @@ module.exports = {
 
   // Car Blocking Page
   carblocking: async (req, res) => {
-    try {
+    // try {
 
     if (req.session.userLogin) {
 
@@ -750,9 +748,9 @@ module.exports = {
     else {
       res.redirect('/login')
     }
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
 
   },
 
@@ -772,7 +770,7 @@ module.exports = {
 
   // Order Payment
   order: async (req, res) => {
-    try {
+    // try {
     if (req.session.userLogin) {
       const id = req.body.proId
      
@@ -806,16 +804,16 @@ module.exports = {
       );
     }
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
 
   },
 
 
   // Verify Payment
   verifyorder: async (req, res) => {
-    try {
+    // try {
     const details = req.body
     
     const crypto = require('crypto')
@@ -839,15 +837,15 @@ module.exports = {
     // res.json({
     //   status:true
     // })
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
   },
 
 
   // Block Car after payment
   ordersuccess: async (req, res) => {
-    try {
+    // try {
     if (req.session.userLogin) {
       const userId = req.session.userId
       const id = req.params.id
@@ -877,9 +875,9 @@ module.exports = {
 
     }
 
-    } catch (err) {
-      next(err)
-    }
+    // } catch (err) {
+    //   next(err)
+    // }
 
   },
 
@@ -973,7 +971,7 @@ module.exports = {
     }
   },
   blockedcarpage: async (req, res) => {
-    try{
+    // try{
 
     if (req.session.userLogin) {
       const id = req.params.id
@@ -1062,13 +1060,13 @@ module.exports = {
         res.redirect('/login')
       }
     }
-  } catch(err){
-    next(err)
-  }
+  // } catch(err){
+  //   next(err)
+  // }
 
   },
   profile: async (req, res) => {
-    try{
+    // try{
 
     if (req.session.userLogin) {
       const id = req.session.userId
@@ -1081,14 +1079,14 @@ module.exports = {
     } else {
       res.redirect('/login')
     }
-  } catch(err){
-    next(err)
-  }
+  // } catch(err){
+  //   next(err)
+  // }
 
   },
 
   editprofilepage: async (req, res) => {
-    try{
+    // try{
 
     if (req.session.userLogin) {
       const id = req.params.id
@@ -1101,14 +1099,14 @@ module.exports = {
     } else {
       res.redirect('/login')
     }
-  } catch(err){
-    next(err)
-  }
+  // } catch(err){
+  //   next(err)
+  // }
 
   },
 
   updateprofile: async (req, res) => {
-    try{
+   
 
     if (req.session.userLogin) {
       const { fullName, userName, email, phone } = req.body
@@ -1120,11 +1118,9 @@ module.exports = {
     } else {
       res.redirect('/login')
     }
-  }catch(err){
-    next(err)
-  }
-
+ 
   },
+  
   search: async (req, res) => {
     const searchQuery = req.body.search
     
@@ -1177,13 +1173,11 @@ module.exports = {
   },
 
   logout: (req, res) => {
-    try {
+  
     req.session.loggedOut = true;
     req.session.destroy()
     res.redirect('/')
-    } catch (err) {
-      next(err)
-    }
-  }
+    
+  },
 
 }

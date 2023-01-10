@@ -25,7 +25,7 @@ module.exports = {
 
     //admin home page
     home: async (req, res) => {
-        try {
+   
             const users = await UserModel.find().countDocuments()
             const products = await ProductModel.find().countDocuments()
             const sold = await ProductModel.find({ sold: 'Sold' }).countDocuments()
@@ -47,23 +47,21 @@ module.exports = {
                 Banner,
                 //  Coupen 
             })
-        } catch (err) {
-            next(err)
-        }
+       
 
     },
 
     //login page
     admin: (req, res) => {
-        try {
+        // try {
             if (!req.session.adminLogin) {
                 res.render('admin/login')
             } else {
                 res.redirect('/admin/adminhome')
             }
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
@@ -73,7 +71,7 @@ module.exports = {
 
     //login
     adminlogin: async (req, res) => {
-        try {
+        // try {
             const { email, password } = req.body;
             const admin = await AdminModel.findOne({ email });
             if (!admin) {
@@ -89,22 +87,22 @@ module.exports = {
             req.session.admin = admin.userName
             res.redirect('/admin/adminhome');
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     //add user page
     adduserpage: (req, res) => {
-        try {
+        // try {
             res.render('admin/adduser', { admin: req.session.admin })
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //add user
     adduser: (req, res) => {
-        try {
+        // try {
             const newUser = UserModel(req.body
 
             );
@@ -124,15 +122,15 @@ module.exports = {
                         })
                 })
             })
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
 
     },
     //view all user
     alluser: async (req, res) => {
-        try {
+        // try {
             const page = parseInt(req.query.page) || 1;
             const items_per_page = 10;
             const totalusers = await UserModel.find().countDocuments()
@@ -146,42 +144,42 @@ module.exports = {
                 PreviousPage: page - 1,
             })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
     // Block and Unblock Users
     blockUser: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await UserModel.findByIdAndUpdate({ _id: id }, { $set: { status: "Blocked" } })
                 .then(() => {
                     res.redirect('/admin/alluser')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     unblockUser: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await UserModel.findByIdAndUpdate({ _id: id }, { $set: { status: "Unblocked" } })
                 .then(() => {
                     res.redirect('/admin/alluser')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //add product page
     addproductpage: async (req, res) => {
-        try {
+        // try {
             if (req.session.adminLogin) {
                 const type = await TypeModel.find()
                 const brand = await BrandModel.find()
@@ -192,9 +190,9 @@ module.exports = {
 
             }
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //add products
@@ -251,7 +249,7 @@ module.exports = {
 
     //view all products
     viewproduct: async (req, res) => {
-        try {
+        // try {
             const page = parseInt(req.query.page) || 1;
             const items_per_page = 5;
             const totalproducts = await ProductModel.find().countDocuments()
@@ -265,27 +263,27 @@ module.exports = {
                 PreviousPage: page - 1,
             })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
     // Delete Product
     deleteproduct: async (req, res) => {
-        try {
+        // try {
             let id = req.params.id;
             await ProductModel.findByIdAndDelete({ _id: id });
             res.redirect("/admin/allproduct")
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //edit product page
     editproductpage: async (req, res) => {
-        try {
+        // try {
             if (req.session.adminLogin) {
                 const id = req.params.id
                 const type = await TypeModel.find()
@@ -297,15 +295,15 @@ module.exports = {
                 res.render('admin/editproduct', { product, type, location, brand, fuel, admin: req.session.admin })
             }
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
     // Update Product
     updateProduct: async (req, res) => {
-        try {
+        // try {
             const { type, brand, fuelType, location, productName, description, reg, transmission, year, km, owner, price, advance } = req.body;
 
             if (req.file) {
@@ -343,15 +341,15 @@ module.exports = {
                 res.redirect('/admin/allproduct')
             })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
 
     // sold car page
     soldcarpage: async (req, res) => {
-        try {
+        // try {
             const page = parseInt(req.query.page) || 1;
             const items_per_page = 5;
             const totalsoldproducts = await ProductModel.find({ sold: 'Sold' }).countDocuments()
@@ -365,9 +363,9 @@ module.exports = {
                 PreviousPage: page - 1,
             })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
@@ -375,7 +373,7 @@ module.exports = {
 
     // Blocked car page
     blockedcarpage: async (req, res) => {
-        try {
+        // try {
             const page = parseInt(req.query.page) || 1;
             const items_per_page = 5;
             const totalblockedproducts = await ProductModel.find({ status: 'Blocked' }).countDocuments()
@@ -394,9 +392,9 @@ module.exports = {
                 drive
             })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
@@ -421,74 +419,74 @@ module.exports = {
 
     // UnBlock Car
     unblockCar: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await ProductModel.findByIdAndUpdate({ _id: id }, { $set: { status: "Unblocked" } })
                 .then(() => {
                     res.redirect('/admin/allproduct')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     // Block car
     blockCar: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await ProductModel.findByIdAndUpdate({ _id: id }, { $set: { status: "Blocked" } })
                 .then(() => {
                     res.redirect('/admin/allproduct')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //====================================================================================================================
 
     // Sold Car
     soldCarp: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await ProductModel.findByIdAndUpdate({ _id: id }, { $set: { sold: "Sold" } })
                 .then(() => {
                     res.redirect('/admin/allproduct')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     // Sold Car
     soldCarb: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await ProductModel.findByIdAndUpdate({ _id: id }, { $set: { sold: "Sold" } })
                 .then(() => {
                     res.redirect('/admin/blockedcars')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     // Not Sold Car
     notsoldCar: async (req, res) => {
-        try {
+        // try {
             const id = req.params.id
             await ProductModel.findByIdAndUpdate({ _id: id }, { $set: { sold: "Notsold" } })
                 .then(() => {
                     res.redirect('/admin/soldcar')
                 })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
 
@@ -506,98 +504,98 @@ module.exports = {
     },
     // NEW BRAND
     addBrand: (req, res) => {
-        try {
+        // try {
             const brand = req.body.brand;
             const newBrand = BrandModel({ brand });
             newBrand.save().then(res.redirect('/admin/brandpage'))
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     // DELETE BRAND
     deletebrand: async (req, res) => {
-        try {
+        // try {
             let id = req.params.id;
 
             await BrandModel.findByIdAndDelete({ _id: id });
             res.redirect("/admin/brandpage")
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //====================================================================================================================
 
     // VEHICLE TYPE
     categorypage: async (req, res) => {
-        try {
+        // try {
             const typeName = await TypeModel.find({});
             res.render('admin/category', { typeName, admin: req.session.admin })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     // NEW VEHICLE TYPE
     addcategory: (req, res) => {
-        try {
+        // try {
             const typeName = req.body.typeName;
             const newCategory = TypeModel({ typeName });
             newCategory.save().then(res.redirect('/admin/category'))
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     // DELETE VEHICLE
     deletecategory: async (req, res) => {
-        try {
+        // try {
             let id = req.params.id;
 
             await TypeModel.findByIdAndDelete({ _id: id });
             res.redirect("/admin/category")
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     //====================================================================================================================
 
     // FUEL TYPE
     fueltypepage: async (req, res) => {
-        try {
+        // try {
             const fuelType = await FuelModel.find({});
             res.render('admin/fuel', { fuelType, admin: req.session.admin })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     // NEW FUEL
     addfuel: (req, res) => {
-        try {
+        // try {
             const fuelType = req.body.fuelType;
             const newfuel = FuelModel({ fuelType });
             newfuel.save().then(res.redirect('/admin/fuel'))
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
     // DELETE FUEL TYPE
     deletefuel: async (req, res) => {
-        try {
+        // try {
             let id = req.params.id;
 
             await FuelModel.findByIdAndDelete({ _id: id });
             res.redirect("/admin/fuel")
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
 
@@ -626,27 +624,27 @@ module.exports = {
 
 
     allBanner: async (req, res) => {
-        try {
+        // try {
             const banners = await BannerModel.find({})
 
             res.render('admin/viewBanner', { banners, index: 1, admin: req.session.admin })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     addBannerPage: async (req, res) => {
-        try {
+        // try {
             res.render('admin/addBanner', { admin: req.session.admin })
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     },
 
     addBanner: async (req, res) => {
-        try {
+        // try {
             const { bannerName, description } = req.body
 
             const image = req.files;
@@ -671,21 +669,21 @@ module.exports = {
                     res.redirect("/admin/addBannerPage");
                 });
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
     deletebanner: async (req, res) => {
-        try {
+        // try {
             let id = req.params.id;
             await BannerModel.findByIdAndDelete({ _id: id });
             res.redirect("/admin/allBanner")
 
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
 
     },
 
@@ -728,14 +726,14 @@ module.exports = {
 
 
     logout: (req, res) => {
-        try {
+        // try {
 
             req.session.loggedOut = true;
             req.session.destroy()
             res.redirect('/admin')
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 
 
