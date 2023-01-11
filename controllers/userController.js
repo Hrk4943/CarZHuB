@@ -463,7 +463,7 @@ module.exports = {
     
 
     if (categoryFilter) {
-      res.render('user/categoryfilter', { login, products, categoryFilter })
+      res.render('user/categoryfilter', { login, user:req.session.user, products, categoryFilter })
     } else {
       res.redirect('/allproduct')
     }
@@ -479,7 +479,7 @@ module.exports = {
 
 
     if (brandFilter) {
-      res.render('user/brandfilter', { login, products, brandFilter })
+      res.render('user/brandfilter', { login, user:req.session.user, products, brandFilter })
     } else {
       res.redirect('/allproducts')
     }
@@ -497,7 +497,7 @@ module.exports = {
   
 
     if (fuelFilter) {
-      res.render('user/fuelfilter', { login, products, fuelFilter })
+      res.render('user/fuelfilter', { login, user:req.session.user, products, fuelFilter })
     } else {
       res.redirect('/allproducts')
     }
@@ -515,7 +515,7 @@ module.exports = {
 
 
     if (locationFilter) {
-      res.render('user/locationfilter', { login, products, locationFilter })
+      res.render('user/locationfilter', { login, user:req.session.user, products, locationFilter })
     } else {
       res.redirect('/allproducts')
     }
@@ -1133,10 +1133,10 @@ module.exports = {
     
     // const category=await categoryModel.find()
     const banner = await BannerModel.find()
-    const brand = await BrandModel.find()
-    const fuel = await FuelModel.find()
-    const location = await LocationModel.find()
-    const type = await TypeModel.find()
+    // const brand = await BrandModel.find()
+    // const fuel = await FuelModel.find()
+    // const location = await LocationModel.find()
+    // const type = await TypeModel.find()
 
    
     const searchlen = search.length
@@ -1147,10 +1147,10 @@ module.exports = {
         search,
         // category,
         banner,
-        brand,
-        fuel,
-        location,
-        type,
+        // brand,
+        // fuel,
+        // location,
+        // type,
         searchQuery
       })
     } else {
@@ -1160,10 +1160,10 @@ module.exports = {
         search,
         // category,
         banner,
-        brand,
-        fuel,
-        location,
-        type,
+        // brand,
+        // fuel,
+        // location,
+        // type,
         searchQuery,
         searchlen
       })

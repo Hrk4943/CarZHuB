@@ -24,7 +24,7 @@ router.get('/ordersuccess/:id', userController.ordersuccess)
 router.get('/ordersuccesshome', userController.successmail)
 router.get('/profile', userController.profile)
 router.get('/editprofile/:id', userController.editprofilepage)
-
+router.get('/logout', userController.logout)
 
 
 router.post('/', userController.login)
@@ -41,6 +41,6 @@ router.post('/order', userController.order)
 router.post('/verifyorder', userController.verifyorder)
 router.post('/updateprofile/:id', userController.updateprofile)
 router.post('/search',userController.search)
-router.post('/logout', userController.logout)
+
 
 module.exports = router

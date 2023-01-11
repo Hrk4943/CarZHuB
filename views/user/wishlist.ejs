@@ -195,6 +195,7 @@
       style="width: 400px; height:300px ;">
   </div>
   <% } else { %>
+    <div class="table-responsive">
   <div class="cart-wrap">
     <div class="container">
       <div class="row">
@@ -215,7 +216,7 @@
                 <%list.forEach(function(x){ %>
                   
                   <tr>
-                    <td width="45%">
+                    <td width="15%">
 
                       <div class="display-flex align-center">
                         <div class="img-product">
@@ -235,7 +236,7 @@
                     <td width="15%">
                       <button onclick="removeWishlist('<%= x.result._id %>')" type="submit"
                         class="btn btn-danger btn-outline btn-lg rounded-pill"
-                        style="width: 200px;"><b>Remove</b></button>
+                        style="width: 100px;"><b>Remove</b></button>
                     </td>
                   </tr>
                   <% }) %>
@@ -249,6 +250,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-- <div style="text-align:center;font-size:14px;padding-bottom:20px;">Get free icon packs for your next project at <a
       href="http://iiicons.in/" target="_blank" style="color:#ff5e63;font-weight:bold;">www.iiicons.in</a></div> -->
 
