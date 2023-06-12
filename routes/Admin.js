@@ -28,7 +28,7 @@ router.get('/fuel', session.adminSession, adminController.fueltypepage)
 
 router.get('/addbanner', session.adminSession, adminController.addBannerPage)
 router.get('/addcoupon', session.adminSession, adminController.addCouponpage)
-router.get('/salesreport',session.adminSession,adminController.salesReport)
+// router.get('/salesreport',session.adminSession,adminController.salesReport)
 
 //post
 router.post('/', adminController.adminlogin)
