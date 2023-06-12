@@ -11,7 +11,7 @@ const CouponModel = require("../models/couponModel")
 
 const bcrypt = require("bcrypt");
 const OrderModel = require("../models/orderModel");
-const moment = require("moment");
+// const moment = require("moment");
 const couponModel = require("../models/couponModel");
 const productModel = require("../models/productModel");
 const orderModel = require("../models/orderModel");
@@ -721,63 +721,62 @@ module.exports = {
         await CouponModel.findByIdAndDelete({ _id: id })
         res.redirect('/admin/allcoupon')
     },
-    salesReport: async (req, res) => {
-        let orders;
-        let total;
-        let sort = req.query;
-        let count= await OrderModel.find().count()
+
+    // salesReport: async (req, res) => {
+    //     let orders;
+    //     let total;
+    //     let sort = req.query;
+    //     let count= await OrderModel.find().count()
      
-        console.log(sort, "sort");
-        if (sort.no == 1) {
-          console.log("jij");
-          const today = moment().startOf("day");
+    //     console.log(sort, "sort");
+    //     if (sort.no == 1) {
+    //       console.log("jij");
+    //       const today = moment().startOf("day");
     
-          console.log(today, "today");
-          orders = await OrderModel.find({
-            // orderStatus: "Placed",
-           date: {
-              $gte: today.toDate(),
-              $lte: moment(today).endOf("day").toDate(),
-            },
-          }).populate('product')
+    //       console.log(today, "today");
+    //       orders = await OrderModel.find({
+    //         // orderStatus: "Placed",
+    //        date: {
+    //           $gte: today.toDate(),
+    //           $lte: moment(today).endOf("day").toDate(),
+    //         },
+    //       }).populate('product')
           
-          total = orders.reduce((acc, cur) => acc + cur.totalAmount, 0);
-          console.log(total, "total");
-        } else if (sort.no == 2) {
-          const month = moment().startOf("month");
-          orders = await OrderModel.find({
-            // orderStatus: "Placed",
-            date: {
-              $gte: month.toDate(),
-              $lte: moment(month).endOf("month").toDate(),
-            },
-          }).populate('product' )
+    //       total = orders.reduce((acc, cur) => acc + cur.totalAmount, 0);
+    //       console.log(total, "total");
+    //     } else if (sort.no == 2) {
+    //       const month = moment().startOf("month");
+    //       orders = await OrderModel.find({
+    //         // orderStatus: "Placed",
+    //         date: {
+    //           $gte: month.toDate(),
+    //           $lte: moment(month).endOf("month").toDate(),
+    //         },
+    //       }).populate('product' )
           
 
-          total = orders.reduce((acc, cur) => acc + cur.totalAmount, 0);
-          console.log(total,'total');
-        }
-        else if(sort.no==3){
-            const year = moment().startOf('year')
-        orders = await OrderModel.find({
-                // orderStatus: 'Placed',
-                date: {
-                    $gte: year.toDate(),
-                    $lte: moment(year).endOf('year').toDate()
-                }
-            }).populate('product')
+    //       total = orders.reduce((acc, cur) => acc + cur.totalAmount, 0);
+    //       console.log(total,'total');
+    //     }
+    //     else if(sort.no==3){
+    //         const year = moment().startOf('year')
+    //     orders = await OrderModel.find({
+    //             // orderStatus: 'Placed',
+    //             date: {
+    //                 $gte: year.toDate(),
+    //                 $lte: moment(year).endOf('year').toDate()
+    //             }
+    //         }).populate('product')
           
 
-            total= orders.reduce((acc,cur)=>acc+cur.totalAmount,0);
-        }
-        else{
-            orders= await OrderModel.find().populate('product')
-            total=orders.reduce((acc,cur)=> acc+cur.totalAmount,0);
-        }
-       
-    
-        res.render("admin/salesReport", { orders, total,number:req.query.no ,admin:req.session.admin,count});
-      },   
+    //         total= orders.reduce((acc,cur)=>acc+cur.totalAmount,0);
+    //     }
+    //     else{
+    //         orders= await OrderModel.find().populate('product')
+    //         total=orders.reduce((acc,cur)=> acc+cur.totalAmount,0);
+    //     } 
+    //     res.render("admin/salesReport", { orders, total,number:req.query.no ,admin:req.session.admin,count});
+    //   },   
 
 
 
